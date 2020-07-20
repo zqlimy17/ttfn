@@ -38,7 +38,6 @@ const App: FC = () => {
             setResults([]);
             setOffset(0);
             let response = await axios({
-                // Calling the Mangools API to get the search volume for keywords[i].
                 method: "get",
                 url: `https://api.giphy.com/v1/gifs/search?api_key=${KEY}&q=${searchQuery}&limit=8&offset=${offset}&rating=g&lang=en`,
                 headers: {
@@ -49,7 +48,6 @@ const App: FC = () => {
             });
             setOffset((offset) => offset + 8);
             setResults((results) => results.concat(response.data.data));
-            setSearchQuery("");
             console.log(response.data.data);
         } catch (error) {
             alert(error.message);
@@ -59,8 +57,22 @@ const App: FC = () => {
         }
     };
 
-    const fetchMore = (): void => {
-        console.log(`fetching more`);
+    const fetchMore = async (): Promise<void> => {
+        try {
+            let response = await axios({
+                method: "get",
+                url: `https://api.giphy.com/v1/gifs/search?api_key=${KEY}&q=${searchQuery}&limit=8&offset=${offset}&rating=g&lang=en`,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers":
+                        "Content-Type, Authorization",
+                },
+            });
+            setOffset((offset) => offset + 8);
+            setResults((results) => results.concat(response.data.data));
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (
@@ -83,6 +95,7 @@ const App: FC = () => {
                                     results={results}
                                     favourites={favourites}
                                     setFavourites={setFavourites}
+                                    fetchMore={fetchMore}
                                 />
                             ) : (
                                 ""

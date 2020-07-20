@@ -4,12 +4,7 @@
   font-family: 'Open Sans', sans-serif !important;
 }
 
-/* a {
-  text-decoration: none;
-} */
-
-/* 
-a:hover {
-  color: grey;
-  text-decoration: underline;
-} */
+.fetch-more:hover {
+  background-color: white !important;
+  color: black !important;
+}
