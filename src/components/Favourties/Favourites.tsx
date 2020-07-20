@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import FavouriteImage from "../Image/FavouriteImage";
 import { Container } from "@material-ui/core";
 
 interface FavouritesProps {
@@ -35,11 +36,9 @@ const Favourites: FC<FavouritesProps> = ({ favourites }) => {
 
     return (
         <Container style={classes.root} maxWidth={"xl"}>
-            {favourites.map((favourite, index) => (
+            {favourites.map((favourite: string, index: number) => (
                 <div style={classes.flex} key={index}>
-                    <div style={classes.imageContainer}>
-                        <img src={favourite} style={classes.image} />
-                    </div>
+                    <FavouriteImage favourite={favourite} />
                 </div>
             ))}
         </Container>

@@ -45,7 +45,7 @@ const Results: FC<ResultsProps> = ({
     return (
         <Container maxWidth={"xl"}>
             <div style={classes.root}>
-                {results.map((result, index) => (
+                {results.map((result: object, index: number) => (
                     <div style={classes.flex} key={index}>
                         <Image
                             result={result}
