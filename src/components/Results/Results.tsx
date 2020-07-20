@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from "react";
+import Image from "../Image/Image";
 import { Container } from "@material-ui/core";
 
 const styles: any = {
@@ -12,16 +13,6 @@ const styles: any = {
         flexBasis: "22%",
         minWidth: "200px",
         margin: "0.5em",
-    },
-    imageContainer: {
-        position: "relative",
-        paddingBottom: "67%",
-    },
-    image: {
-        objectFit: "cover",
-        width: "100%",
-        height: "100%",
-        position: "absolute",
     },
     more: {
         fontWeight: "bold",
@@ -43,7 +34,12 @@ interface ResultsProps {
     fetchMore: () => Promise<void>;
 }
 
-const Results: FC<ResultsProps> = ({ results, setFavourites, fetchMore }) => {
+const Results: FC<ResultsProps> = ({
+    results,
+    favourites,
+    setFavourites,
+    fetchMore,
+}) => {
     const classes = styles;
 
     return (
@@ -51,20 +47,11 @@ const Results: FC<ResultsProps> = ({ results, setFavourites, fetchMore }) => {
             <div style={classes.root}>
                 {results.map((result, index) => (
                     <div style={classes.flex} key={index}>
-                        <div
-                            style={classes.imageContainer}
-                            onClick={() =>
-                                setFavourites((favourites) => [
-                                    ...favourites,
-                                    result.images.original_still.url,
-                                ])
-                            }
-                        >
-                            <img
-                                src={result.images.original_still.url}
-                                style={classes.image}
-                            />
-                        </div>
+                        <Image
+                            result={result}
+                            favourites={favourites}
+                            setFavourites={setFavourites}
+                        />
                     </div>
                 ))}
             </div>
