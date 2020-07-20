@@ -1,4 +1,15 @@
 * {
-  outline: 1px solid gold;
-  outline-offset: -1px;
+  /* outline: 1px solid gold;
+  outline-offset: -1px; */
+  font-family: 'Open Sans', sans-serif !important;
 }
+
+/* a {
+  text-decoration: none;
+} */
+
+/* 
+a:hover {
+  color: grey;
+  text-decoration: underline;
+} */

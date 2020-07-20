@@ -5,6 +5,8 @@ import {
     Switch,
     Redirect,
 } from "react-router-dom";
+import { Container } from "@material-ui/core";
+
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import Search from "./components/Search/Search";
@@ -18,22 +20,27 @@ const KEY = process.env.REACT_APP_GIPHY_KEY;
 const App: FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [favourites, setFavorites] = useState<object[]>([]);
+
+    const fetchMore = (): void => {
+        console.log(`fetching more`);
+    };
+
     return (
-        <div className='App'>
+        <Container className='App' maxWidth='xl'>
             <Router>
                 <Switch>
                     <Nav />
                     <Route path='/favourites'>
                         <Favourites />
                     </Route>
-                    <Route path='/'>
+                    <Route path='/search'>
                         <Search />
                         <Results />
                     </Route>
                     <Footer />
                 </Switch>
             </Router>
-        </div>
+        </Container>
     );
 };
 
