@@ -23,7 +23,7 @@ const Search: FC<SearchProps> = ({
     const classes = styles;
 
     return (
-        <Container>
+        <Container maxWidth='md'>
             <form onSubmit={(event) => handleSubmit(event)}>
                 <TextField
                     fullWidth

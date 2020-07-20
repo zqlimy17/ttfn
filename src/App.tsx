@@ -22,7 +22,14 @@ const theme = createMuiTheme({
     },
 });
 
+const styles: any = {
+    root: {
+        paddingBottom: "50px",
+    },
+};
+
 const App: FC = () => {
+    const classes = styles;
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [results, setResults] = useState<object[]>([]);
     const [favourites, setFavourites] = useState<string[]>([]);
@@ -76,7 +83,7 @@ const App: FC = () => {
     };
 
     return (
-        <Container className='App' maxWidth='xl'>
+        <Container className='App' maxWidth='xl' style={classes.root}>
             <ThemeProvider theme={theme}>
                 <Router>
                     <Nav />
@@ -101,8 +108,8 @@ const App: FC = () => {
                                 ""
                             )}
                         </Route>
-                        <Footer />
                     </Switch>
+                    <Footer />
                 </Router>
             </ThemeProvider>
         </Container>
