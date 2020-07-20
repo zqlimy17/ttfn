@@ -10,7 +10,6 @@ const styles: any = {
     root: {
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "space-between",
     },
     flex: {
         flexGrow: "1",

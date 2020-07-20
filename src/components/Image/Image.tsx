@@ -45,15 +45,27 @@ const Image: FC<ImageProps> = ({ result, favourites, setFavourites }) => {
             alert(error.message);
         }
     }, [favourites]);
+
+    const handleRemove = (): void => {
+        setLiked(false);
+        let tempArray = favourites;
+        tempArray.splice(
+            favourites.indexOf(result.images.original_still.url),
+            1
+        );
+        setFavourites(tempArray);
+    };
     return (
         <div
             style={classes.imageContainer}
-            onClick={() =>
-                setFavourites((favourites) => [
-                    ...favourites,
-                    result.images.original_still.url,
-                ])
-            }
+            onClick={() => {
+                liked
+                    ? handleRemove()
+                    : setFavourites((favourites) => [
+                          ...favourites,
+                          result.images.original_still.url,
+                      ]);
+            }}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
