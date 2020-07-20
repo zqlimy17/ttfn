@@ -27,9 +27,11 @@ const styles: any = {
 
 interface ResultsProps {
     results: any[];
+    favourites: string[];
+    setFavourites: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Results: FC<ResultsProps> = ({ results }) => {
+const Results: FC<ResultsProps> = ({ results, setFavourites }) => {
     const classes = styles;
     useEffect(() => {
         console.log(results);
@@ -38,7 +40,15 @@ const Results: FC<ResultsProps> = ({ results }) => {
         <Container style={classes.root} maxWidth={"xl"}>
             {results.map((result, index) => (
                 <div style={classes.flex} key={index}>
-                    <div style={classes.imageContainer}>
+                    <div
+                        style={classes.imageContainer}
+                        onClick={() =>
+                            setFavourites((favourites) => [
+                                ...favourites,
+                                result.images.original_still.url,
+                            ])
+                        }
+                    >
                         <img
                             src={result.images.original_still.url}
                             style={classes.image}

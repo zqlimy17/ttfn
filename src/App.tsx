@@ -25,7 +25,7 @@ const theme = createMuiTheme({
 const App: FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [results, setResults] = useState<object[]>([]);
-    const [favourites, setFavorites] = useState<object[]>([]);
+    const [favourites, setFavourites] = useState<string[]>([]);
     const [offset, setOffset] = useState<number>(0);
     const [fetched, setFetched] = useState<boolean>(false);
 
@@ -70,7 +70,7 @@ const App: FC = () => {
                     <Nav />
                     <Switch>
                         <Route path='/favourites'>
-                            <Favourites />
+                            <Favourites favourites={favourites} />
                         </Route>
                         <Route path='/search'>
                             <Search
@@ -78,7 +78,15 @@ const App: FC = () => {
                                 setSearchQuery={setSearchQuery}
                                 handleSubmit={handleSubmit}
                             />
-                            {fetched ? <Results results={results} /> : ""}
+                            {fetched ? (
+                                <Results
+                                    results={results}
+                                    favourites={favourites}
+                                    setFavourites={setFavourites}
+                                />
+                            ) : (
+                                ""
+                            )}
                         </Route>
                         <Footer />
                     </Switch>
