@@ -89,7 +89,10 @@ const App: FC = () => {
                     <Nav />
                     <Switch>
                         <Route path='/favourites'>
-                            <Favourites favourites={favourites} />
+                            <Favourites
+                                favourites={favourites}
+                                setFavourites={setFavourites}
+                            />
                         </Route>
                         <Route path='/search'>
                             <Search
