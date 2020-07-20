@@ -1,5 +1,10 @@
 import React, { FC, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+} from "react-router-dom";
 import axios from "axios";
 import { Container } from "@material-ui/core";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -84,6 +89,7 @@ const App: FC = () => {
         <Container className='App' maxWidth='xl' style={classes.root}>
             <ThemeProvider theme={theme}>
                 <Router>
+                    <Redirect to='/search' />
                     <Nav num={favourites.length} />
                     <Switch>
                         <Route path='/favourites'>
