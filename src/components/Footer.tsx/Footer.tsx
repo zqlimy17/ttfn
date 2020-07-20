@@ -14,7 +14,7 @@ const styles: any = {
     },
     paragraph: {
         margin: "7px",
-        color: "#878787",
+        color: "dimgrey",
         fontWeight: "bold",
     },
 };
