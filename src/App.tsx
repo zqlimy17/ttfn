@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { Container } from "@material-ui/core";
@@ -12,7 +12,6 @@ import Results from "./components/Results/Results";
 import Footer from "./components/Footer.tsx/Footer";
 import Favourites from "./components/Favourties/Favourites";
 
-// `https://api.giphy.com/v1/gifs/search?api_key=${KEY}&q=${searchQuery}&limit=8&offset=0&rating=g&lang=en`
 const KEY = process.env.REACT_APP_GIPHY_KEY;
 
 const theme = createMuiTheme({
@@ -36,6 +35,11 @@ const App: FC = () => {
     const [offset, setOffset] = useState<number>(0);
     const [fetched, setFetched] = useState<boolean>(false);
 
+    useEffect(() => {
+        let favs = JSON.parse(window.localStorage.getItem("favs") || "[]");
+        if (favs) setFavourites(favs);
+    }, []);
+
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
@@ -55,12 +59,10 @@ const App: FC = () => {
             });
             setOffset((offset) => offset + 8);
             setResults((results) => results.concat(response.data.data));
-            console.log(response.data.data);
         } catch (error) {
             alert(error.message);
         } finally {
             setFetched(true);
-            console.log(results);
         }
     };
 

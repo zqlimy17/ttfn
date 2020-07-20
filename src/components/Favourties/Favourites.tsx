@@ -35,11 +35,11 @@ const Favourites: FC<FavouritesProps> = ({ favourites, setFavourites }) => {
     const [update, setUpdate] = useState<boolean>(false);
     const classes = styles;
     const handleRemove = (favourite: string): void => {
-        console.log("removed");
         let tempArray = favourites;
         tempArray.splice(favourites.indexOf(favourite), 1);
         setFavourites(tempArray);
         setUpdate(!update);
+        localStorage.setItem("favs", JSON.stringify(tempArray));
     };
     return (
         <Container style={classes.root} maxWidth={"xl"}>
