@@ -2,11 +2,6 @@ import React, { FC, useState } from "react";
 import FavouriteImage from "../Image/FavouriteImage";
 import { Container } from "@material-ui/core";
 
-interface FavouritesProps {
-    favourites: string[];
-    setFavourites: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
 const styles: any = {
     root: {
         display: "flex",
@@ -31,15 +26,25 @@ const styles: any = {
     },
 };
 
-const Favourites: FC<FavouritesProps> = ({ favourites, setFavourites }) => {
-    const [update, setUpdate] = useState<boolean>(false);
+interface FavouritesProps {
+    favourites: string[];
+    setFavourites: React.Dispatch<React.SetStateAction<string[]>>;
+    update: boolean;
+    setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Favourites: FC<FavouritesProps> = ({
+    favourites,
+    setFavourites,
+    update,
+    setUpdate,
+}) => {
     const classes = styles;
     const handleRemove = (favourite: string): void => {
         let tempArray = favourites;
         tempArray.splice(favourites.indexOf(favourite), 1);
         setFavourites(tempArray);
         setUpdate(!update);
-        localStorage.setItem("favs", JSON.stringify(tempArray));
     };
     return (
         <Container style={classes.root} maxWidth={"xl"}>

@@ -19,7 +19,12 @@ const styles: { [name: string]: CSSProperties } = {
         color: "#444444",
     },
 };
-const Nav: FC = () => {
+
+interface NavProps {
+    num: number;
+}
+
+const Nav: FC<NavProps> = ({ num }) => {
     const classes = styles;
     return (
         <div>
@@ -41,7 +46,7 @@ const Nav: FC = () => {
                     activeStyle={classes.active}
                     style={classes.menu}
                 >
-                    Favourites
+                    Favourites {num ? `(${num})` : ""}
                 </NavLink>
             </div>
             <hr />

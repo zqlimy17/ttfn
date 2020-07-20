@@ -54,7 +54,6 @@ const Image: FC<ImageProps> = ({ result, favourites, setFavourites }) => {
             1
         );
         setFavourites(tempArray);
-        localStorage.setItem("favs", JSON.stringify(tempArray));
     };
     return (
         <div
@@ -66,7 +65,6 @@ const Image: FC<ImageProps> = ({ result, favourites, setFavourites }) => {
                           ...favourites,
                           result.images.original_still.url,
                       ]);
-                localStorage.setItem("favs", JSON.stringify(favourites));
             }}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}

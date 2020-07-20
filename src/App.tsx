@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { Container } from "@material-ui/core";
@@ -34,11 +34,7 @@ const App: FC = () => {
     const [favourites, setFavourites] = useState<string[]>([]);
     const [offset, setOffset] = useState<number>(0);
     const [fetched, setFetched] = useState<boolean>(false);
-
-    useEffect(() => {
-        let favs = JSON.parse(window.localStorage.getItem("favs") || "[]");
-        if (favs) setFavourites(favs);
-    }, []);
+    const [update, setUpdate] = useState<boolean>(false);
 
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
@@ -88,12 +84,14 @@ const App: FC = () => {
         <Container className='App' maxWidth='xl' style={classes.root}>
             <ThemeProvider theme={theme}>
                 <Router>
-                    <Nav />
+                    <Nav num={favourites.length} />
                     <Switch>
                         <Route path='/favourites'>
                             <Favourites
                                 favourites={favourites}
                                 setFavourites={setFavourites}
+                                update={update}
+                                setUpdate={setUpdate}
                             />
                         </Route>
                         <Route path='/search'>
